@@ -1,0 +1,68 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ${APHEX_DOCKERFILE:-Dockerfile}
+
+    restart: unless-stopped
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      ORIGIN: ${AUTH_URL}
+      BODY_SIZE_LIMIT: 50M
+      NODE_ENV: production
+
+      AGENT_API_KEY: ${AGENT_API_KEY}
+      AGENT_MODEL: ${AGENT_MODEL}
+      AGENT_BASE_URL: ${AGENT_BASE_URL}
+
+      AUTH_URL: ${AUTH_URL:?AUTH_URL is required}
+      AUTH_SECRET: ${AUTH_SECRET:?AUTH_SECRET is required}
+
+      APHEX_DATABASE: postgres
+      DATABASE_URL: postgres://${PG_USER:?PG_USER is required}:${PG_PASSWORD:?PG_PASSWORD is required}@db:5432/${PG_DATABASE:?PG_DATABASE is required}
+
+      APHEX_UPLOADS_DIR: /data/uploads
+      APHEX_EMBEDDED_WORKER: ${APHEX_EMBEDDED_WORKER:-true}
+
+      APHEX_SECRET_ENCRYPTION_KEY: ${APHEX_SECRET_ENCRYPTION_KEY:-}
+      APHEX_ASSET_SIGNING_SECRET: ${APHEX_ASSET_SIGNING_SECRET:-}
+
+      APHEX_BOOTSTRAP_EMAIL: ${APHEX_BOOTSTRAP_EMAIL:-}
+      AUTH_INVITE_ONLY: ${AUTH_INVITE_ONLY:-true}
+
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      APHEX_EMAIL_FROM: ${APHEX_EMAIL_FROM:-}
+
+    volumes:
+      - ${APHEX_DATA:-aphex_data}:/data
+
+    ports:
+      - "${APHEX_BIND_ADDRESS:-127.0.0.1}:${APHEX_PORT:-3100}:3000"
+
+  db:
+    image: ${POSTGRES_IMAGE:-postgres:18-alpine}
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: ${PG_USER:?PG_USER is required}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:?PG_PASSWORD is required}
+      POSTGRES_DB: ${PG_DATABASE:?PG_DATABASE is required}
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    volumes:
+      - ${APHEX_DB:-aphex_db}:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: ${PG_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${PG_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${PG_HEALTHCHECK_RETRIES:-5}
+      start_period: ${PG_HEALTHCHECK_START_PERIOD:-10s}
+
+volumes:
+  aphex_data:
+  aphex_db:
