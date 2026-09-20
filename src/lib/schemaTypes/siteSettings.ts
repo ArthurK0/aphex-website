@@ -12,23 +12,23 @@ import { defineType } from '@aphexcms/cms-core';
 const siteSettings = defineType({
 	type: 'document',
 	name: 'siteSettings',
-	title: 'Site Settings',
-	description: 'Site name, description and logo',
+	title: 'Настройки сайта',
+	description: 'Название сайта, описание и логотип',
 	icon: Settings,
 	// Files this under a "Settings" heading in the admin's type list rather than
 	// mixing it in with content types.
 	group: 'Settings',
 	singleton: true,
 	groups: [
-		{ name: 'general', title: 'General', default: true },
-		{ name: 'branding', title: 'Branding' }
+		{ name: 'general', title: 'Общий', default: true },
+		{ name: 'branding', title: 'Брендирование' }
 	],
 	fields: [
 		{
 			name: 'title',
 			type: 'string',
-			title: 'Site name',
-			description: 'Shown in the browser tab, and as a fallback when no logo is set.',
+			title: 'Название сайта',
+			description: 'Отображается во вкладке браузера и используется в качестве резервного варианта, если логотип не задан.',
 			group: 'general'
 		},
 		{
