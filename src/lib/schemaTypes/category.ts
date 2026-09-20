@@ -10,21 +10,21 @@ import { Tags } from '@lucide/svelte';
 export const category = defineType({
 	type: 'document',
 	name: 'category',
-	title: 'Category',
-	description: 'Groups posts',
+	title: 'Теги',
+	description: 'Метки для статей',
 	icon: Tags,
 	preview: { select: { title: 'title', subtitle: 'slug' } },
 	fields: [
 		{
 			name: 'title',
 			type: 'string',
-			title: 'Title',
+			title: 'Заголовок',
 			validation: (Rule) => Rule.required()
 		},
 		{
 			name: 'slug',
 			type: 'slug',
-			title: 'Slug',
+			title: 'УРЛ',
 			source: 'title',
 			validation: (Rule) => Rule.required()
 		}
