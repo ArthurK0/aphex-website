@@ -36,15 +36,15 @@ const siteSettings = defineType({
 			type: 'text',
 			title: 'Description',
 			rows: 3,
-			description: "The default meta description, used on pages that don't set their own.",
+			description: "Мета-описание по умолчанию, используемое на страницах, которые не задают собственное описание.",
 			group: 'general'
 		},
 		{
 			name: 'logo',
 			type: 'image',
-			title: 'Logo',
+			title: 'Логотип',
 			description:
-				'Replaces the site name in the header. Use a single-colour SVG (or transparent PNG) with dark marks: the header sits over the hero image on some pages and flips the logo to white there, which only works on a monochrome logo with a transparent background.',
+				'Заменяет название сайта в шапке сайта. Используйте одноцветный SVG (или прозрачный PNG) с темными метками: на некоторых страницах шапка сайта располагается поверх главного изображения и переворачивает логотип на белый цвет, что работает только с монохромным логотипом с прозрачным фоном.',
 			group: 'branding'
 		},
 		{
@@ -52,7 +52,7 @@ const siteSettings = defineType({
 			type: 'image',
 			title: 'Favicon',
 			description:
-				'The browser tab icon, for the public site and the admin. A square PNG or SVG, 32px or larger.',
+				'Значок вкладки браузера для общедоступного сайта и административной панели. Квадратный PNG или SVG-файл размером 32 пикселя или больше.',
 			group: 'branding'
 		},
 		{
@@ -60,8 +60,8 @@ const siteSettings = defineType({
 			// control when the useful range is small and the feedback is visual.
 			name: 'logoHeight',
 			type: 'number',
-			title: 'Logo height',
-			description: 'Height of the header logo in pixels. Width follows the aspect ratio.',
+			title: 'Высота логотипа',
+			description: 'Высота логотипа в заголовке в пикселях. Ширина соответствует соотношению сторон.',
 			group: 'branding',
 			min: 16,
 			max: 80,
