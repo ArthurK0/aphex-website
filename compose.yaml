@@ -13,7 +13,7 @@ services:
     environment:
       ORIGIN: ${AUTH_URL}
       BODY_SIZE_LIMIT: 50M
-      NODE_ENV: production
+      NODE_ENV: ${NODE_ENV}
 
       AGENT_API_KEY: ${AGENT_API_KEY}
       AGENT_MODEL: ${AGENT_MODEL}
