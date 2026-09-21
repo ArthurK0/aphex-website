@@ -34,7 +34,7 @@ const siteSettings = defineType({
 		{
 			name: 'description',
 			type: 'text',
-			title: 'Description',
+			title: 'Описание',
 			rows: 3,
 			description: "Мета-описание по умолчанию, используемое на страницах, которые не задают собственное описание.",
 			group: 'general'
