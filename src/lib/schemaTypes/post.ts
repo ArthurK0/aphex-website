@@ -16,12 +16,12 @@ import { richTextBlocks } from './objects/blocks.js';
 const postType = defineType({
 	type: 'document',
 	name: 'post',
-	title: 'Post',
-	description: 'A dated article',
+	title: 'Блог',
+	description: 'Устаревшая статья',
 	icon: Newspaper,
 	groups: [
-		{ name: 'content', title: 'Content', default: true },
-		{ name: 'meta', title: 'Meta' },
+		{ name: 'content', title: 'Содержание', default: true },
+		{ name: 'meta', title: 'МЕТА' },
 		{ name: 'seo', title: 'SEO' }
 	],
 	preview: {
@@ -43,14 +43,14 @@ const postType = defineType({
 		{
 			name: 'title',
 			type: 'string',
-			title: 'Title',
+			title: 'Заголовок',
 			group: 'content',
 			validation: (Rule) => Rule.required()
 		},
 		{
 			name: 'slug',
 			type: 'slug',
-			title: 'Slug',
+			title: 'УРЛ',
 			source: 'title',
 			group: 'content',
 			validation: (Rule) => Rule.required()
@@ -58,21 +58,21 @@ const postType = defineType({
 		{
 			name: 'excerpt',
 			type: 'text',
-			title: 'Excerpt',
+			title: 'Аннотация',
 			rows: 2,
-			description: 'One or two lines. Shown on cards and used as the SEO fallback.',
+			description: 'Одна-две строки. Отображаются на карточках и используются в качестве резервного варианта для SEO.',
 			group: 'content'
 		},
 		{
 			name: 'heroImage',
 			type: 'image',
-			title: 'Hero image',
+			title: 'Главное изображение',
 			group: 'content'
 		},
 		{
 			name: 'content',
 			type: 'array',
-			title: 'Content',
+			title: 'Содержание',
 			group: 'content',
 			of: [
 				{
@@ -83,8 +83,8 @@ const postType = defineType({
 								name: 'link',
 								title: 'Link',
 								fields: [
-									{ name: 'href', type: 'url', title: 'URL' },
-									{ name: 'blank', type: 'boolean', title: 'Open in new tab' }
+									{ name: 'href', type: 'url', title: 'УРЛ' },
+									{ name: 'blank', type: 'boolean', title: 'Открыть в новой вкладке' }
 								]
 							}
 						]
@@ -98,7 +98,7 @@ const postType = defineType({
 		{
 			name: 'categories',
 			type: 'array',
-			title: 'Categories',
+			title: 'Разделы',
 			group: 'meta',
 			of: [{ type: 'reference', to: [{ type: 'category' }] }]
 		},
@@ -109,7 +109,7 @@ const postType = defineType({
 			// can carry one.
 			name: 'relatedPosts',
 			type: 'array',
-			title: 'Related posts',
+			title: 'Похожие публикации',
 			group: 'meta',
 			of: [{ type: 'reference', to: [{ type: 'post' }] }]
 		}
